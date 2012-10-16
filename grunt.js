@@ -51,11 +51,12 @@ module.exports = function(grunt) {
       var testswarm = require( "testswarm" ),
       testUrls = [],
       config = grunt.file.readJSON(configFile),
+      pkg = grunt.file.readJSON('package.json'),
       tests = "core".split(" ");
 
       tests.forEach(
         function( test ) {
-          testUrls.push( config.testUrl + commit + "/tests/index.html?module=" + test );
+          testUrls.push( config.testUrl +  pkg.name + '/' + commit + "/tests/index.html?module=" + test );
         });
 
 
@@ -69,7 +70,7 @@ module.exports = function(grunt) {
         {
           authUsername: config.authUsername,
           authToken: config.authToken,
-          jobName: 'Commit #<a href="#' + commit + '">' + commit.substr( 0, 10 ) + '</a>',
+          jobName: 'Commit #<a href="#' + pkg.name + '/' + commit + '">' + commit.substr( 0, 10 ) + '</a>',
           runMax: config.runMax,
           "runNames[]": tests,
           "runUrls[]": testUrls,
