@@ -8,3 +8,6 @@ system/helper
 download/
 config.php
 admin/config.php
+node_modules
+bin
+dist
